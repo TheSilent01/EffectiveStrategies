@@ -1,0 +1,710 @@
+<!-- This was programmed by EL AIDOUS YASSINE for an English project to emphasize the statistical side of this presentation -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Combined Study Surveys and Charts</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    @layer base {
+      :root {
+        --background: 240 5% 10%; /* Slightly lighter */
+        --foreground: 60 5% 85%; /* Slightly darker */
+        --primary: 240 0% 85%; /* Adjusted for better contrast */
+        --primary-foreground: 60 0% 10%;
+        --secondary: 240 4% 20%; /* Slightly lighter */
+        --secondary-foreground: 60 5% 80%;
+        --accent: 240 0% 20%; /* Slightly lighter */
+        --accent-foreground: 60 0% 95%;
+        --destructive: 0 60% 55%; /* Slightly lighter */
+        --destructive-foreground: 0 0% 95%;
+        --muted: 240 5% 30%; /* Slightly lighter */
+        --muted-foreground: 60 5% 80%;
+        --card: 240 4% 15%; /* Slightly lighter */
+        --card-foreground: 60 5% 85%;
+        --popover: 240 5% 20%; /* Slightly lighter */
+        --popover-foreground: 60 5% 80%;
+        --border: 240 6% 25%; /* Slightly lighter */
+        --input: 240 6% 25%; /* Slightly lighter */
+        --ring: 240 5% 85%; /* Adjusted for better contrast */
+        --chart-1: 359 2% 85%; /* Adjusted for better readability */
+        --chart-2: 240 1% 70%;
+        --chart-3: 240 1% 55%;
+        --chart-4: 240 1% 40%;
+        --chart-5: 240 2% 25%;
+        --chart-6: 240 2% 20%;
+        --chart-7: 240 2% 15%;
+        --chart-8: 240 3% 10%; /* Adjusted for better readability */
+      }
+      .dark {
+        --background: 240 5% 10%; /* Slightly lighter */
+        --foreground: 60 5% 85%; /* Slightly darker */
+        --primary: 240 0% 85%; /* Adjusted for better contrast */
+        --primary-foreground: 60 0% 10%;
+        --secondary: 240 4% 20%; /* Slightly lighter */
+        --secondary-foreground: 60 5% 80%;
+        --accent: 240 0% 20%; /* Slightly lighter */
+        --accent-foreground: 60 0% 95%;
+        --destructive: 0 60% 55%; /* Slightly lighter */
+        --destructive-foreground: 0 0% 95%;
+        --muted: 240 5% 30%; /* Slightly lighter */
+        --muted-foreground: 60 5% 80%;
+        --card: 240 4% 15%; /* Slightly lighter */
+        --card-foreground: 60 5% 85%;
+        --popover: 240 5% 20%; /* Slightly lighter */
+        --popover-foreground: 60 5% 80%;
+        --border: 240 6% 25%; /* Slightly lighter */
+        --input: 240 6% 25%; /* Slightly lighter */
+        --ring: 240 5% 85%; /* Adjusted for better contrast */
+        --chart-1: 359 2% 85%; /* Adjusted for better readability */
+        --chart-2: 240 1% 70%;
+        --chart-3: 240 1% 55%;
+        --chart-4: 240 1% 40%;
+        --chart-5: 240 2% 25%;
+        --chart-6: 240 2% 20%;
+        --chart-7: 240 2% 15%;
+        --chart-8: 240 3% 10%; /* Adjusted for better readability */
+      }
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: hsl(var(--background));
+      color: hsl(var(--foreground));
+      margin: 20px;
+      display: grid;
+      gap: 2rem;
+    }
+    .card {
+      background-color: hsl(var(--card));
+      color: hsl(var(--card-foreground));
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      padding: 1.5rem;
+    }
+    .card-header {
+      border-bottom: 1px solid hsl(var(--border));
+      text-align: center;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .card-description {
+      font-size: 0.875rem;
+      color: hsl(var(--muted-foreground));
+    }
+    .advice-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 1rem;
+    }
+    .advice-item {
+      background-color: hsl(var(--secondary));
+      color: hsl(var(--secondary-foreground));
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      position: relative;
+    }
+    .advice-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background-color: hsl(var(--chart-1));
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+    .chart-container {
+      height: 300px;
+      margin: 1rem 0;
+    }
+    canvas {
+      width: 100% !important;
+      height: auto !important;
+    }
+    .chart-legend {
+      list-style: none;
+      padding: 0 1rem;
+      margin: 1rem 0;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: hsl(var(--muted-foreground));
+    }
+    .legend-color {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Exam Preparation Advice -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Effective Strategies to prepare for an Engineering Exam</div>
+      <div class="card-description">Collected Responses (n=9)</div>
+    </div>
+    <ul class="advice-list">
+      <li class="advice-item">Apply engineering and project management to studying, approach the curriculum as an engineer would approach analyzing problems.</li>
+      <li class="advice-item">To prepare well for engineering exams, make a study plan and start early. Focus on understanding concepts, not just memorizing formulas. Practice old exams and solve many problems to get better. Use short notes and explain ideas in simple words to remember them easily.</li>
+      <li class="advice-item">Don’t let courses go until the last minute because you will feel anxiety and stress. Don’t forget to learn in a smart way, not the hard way, and keep hope.</li>
+      <li class="advice-item">Do what you can possibly do. When being stressed, you will probably procrastinate, which will result in nothing. Even if there is 1 hour left, just do your best with the available time instead of blaming yourself or saying "I should have done this earlier."</li>
+      <li class="advice-item">Pray a lot.</li>
+      <li class="advice-item">Don’t study engineering.</li>
+      <li class="advice-item">When you rest and you don’t study, set a goal to actually rest and don’t burn your energy. More important than “engineering” your time is engineering your energy.</li>
+      <li class="advice-item">Just stay active and explore other areas for more general knowledge.</li>
+      <li class="advice-item">Just do everything on time to be honest; don't let it stack up on you.</li>
+    </ul>
+  </div>
+
+  <!-- Topic Prioritization Chart -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Topic Prioritization Methods</div>
+      <div class="card-description">Survey Results (n=12)</div>
+    </div>
+    <div class="chart-container">
+      <canvas id="prioritizationChart"></canvas>
+    </div>
+    <div class="card-footer">
+      <div class="font-medium">
+        Most popular: Focus on high-weightage topics (58.3%)
+        <span style="font-size: 1.2em; color: hsl(var(--primary));">🏆</span>
+      </div>
+      <div class="leading-none">
+        Showing prioritization strategies used by students
+      </div>
+    </div>
+  </div>
+
+  <!-- Study Techniques Chart -->
+  <div class="card">
+    <h2 class="card-title">Study Techniques Usage</h2>
+    <div class="card-description">Student Survey Results (n=7 respondents)</div>
+    <div class="chart-container">
+      <canvas id="studyTechniquesChart"></canvas>
+    </div>
+    <div class="card-footer">
+      <div class="font-medium">
+        Most used: Time-blocking (71.4%)
+        <span style="font-size: 1.2em; color: hsl(var(--primary));">🏆</span>
+      </div>
+      <div class="leading-none">
+        Popular time management strategies among students
+      </div>
+    </div>
+  </div>
+
+  <!-- Exam Challenges Chart -->
+  <div class="card">
+    <h2 class="card-title">Exam Preparation Challenges</h2>
+    <div class="card-description">Student Survey Results (n=12 respondents)</div>
+    <div class="chart-container">
+      <canvas id="examChallengesChart"></canvas>
+    </div>
+    <div class="card-footer">
+      <div class="font-medium">
+        Top challenge: Procrastination (75%)
+        <span style="font-size: 1.2em; color: hsl(var(--destructive));">🔥</span>
+      </div>
+      <div class="leading-none">
+        Most common difficulties faced during exam preparation
+      </div>
+    </div>
+  </div>
+
+  <!-- Student Level Distribution Chart -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Student Level Distribution</div>
+      <div class="card-description">Survey Results (n=12)</div>
+    </div>
+    <div class="chart-container">
+      <canvas id="studentLevelChart"></canvas>
+    </div>
+    <ul class="chart-legend" id="studentLevelLegend"></ul>
+  </div>
+
+  <!-- Academic Fields Chart -->
+  <div class="card">
+    <div class="card-header" style="padding: 1.5rem; border-bottom: 1px solid hsl(var(--border)); text-align: center">
+      <div class="card-title">Academic Fields Distribution</div>
+      <div class="card-description">Survey Results (n=12)</div>
+    </div>
+    <div class="chart-container">
+      <canvas id="academicFieldsChart"></canvas>
+    </div>
+    <ul class="chart-legend" id="academicFieldsLegend"></ul>
+  </div>
+
+  <!-- Countries Distribution Chart -->
+  <div class="card">
+    <div class="card-header" style="padding: 1.5rem; border-bottom: 1px solid hsl(var(--border)); text-align: center">
+      <div class="card-title">Countries Distribution</div>
+      <div class="card-description">Survey Results (n=11)</div>
+    </div>
+    <div class="chart-container">
+      <canvas id="countriesChart"></canvas>
+    </div>
+    <ul class="chart-legend" id="countriesLegend"></ul>
+  </div>
+
+  <!-- Time Management Chart -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Time Management Usage</div>
+      <div class="card-description">Survey Results (n=12)</div>
+    </div>
+    <div class="chart-container">
+      <canvas id="timeManagementChart"></canvas>
+    </div>
+    <ul class="chart-legend" id="timeManagementLegend"></ul>
+  </div>
+
+  <!-- Study Strategies Chart -->
+  <div class="card">
+    <h2 class="card-title">Study Strategies Effectiveness</h2>
+    <div class="card-description">Survey Results (n=12 respondents)</div>
+    <div class="chart-container">
+      <canvas id="studyStrategiesChart"></canvas>
+    </div>
+    <div class="card-footer">
+      <div class="font-medium">
+        Most popular: Practicing past papers (75%)
+        <span style="font-size: 1.2em; color: hsl(var(--primary));">🏆</span>
+      </div>
+      <div class="leading-none">
+        Strategies used by students for exam preparation
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Helper function to generate grayscale colors dynamically
+    function getChartColors(count) {
+      const colors = [];
+      for (let i = 0; i < count; i++) {
+        const grayValue = Math.round((i / (count - 1)) * 70 + 30); // Adjusted to make colors brighter
+        colors.push(`hsl(0, 0%, ${grayValue}%)`); // Grayscale from light gray (30%) to white (100%)
+      }
+      return colors;
+    }
+
+    // Topic Prioritization Chart
+    const prioritizationData = [
+      { method: 'Focus on high-weightage topics', count: 7, percentage: 58.3 },
+      { method: 'Focus on weak areas first', count: 5, percentage: 41.7 },
+      { method: 'Study everything equally', count: 1, percentage: 8.3 },
+      { method: 'Other (please specify)', count: 1, percentage: 8.3 }
+    ];
+    new Chart(document.getElementById('prioritizationChart'), {
+      type: 'bar',
+      data: {
+        labels: prioritizationData.map(item => item.method),
+        datasets: [{
+          label: 'Students',
+          data: prioritizationData.map(item => item.count),
+          backgroundColor: getChartColors(prioritizationData.length),
+          borderRadius: 5,
+          barThickness: 20
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: context =>
+                `${context.label}: ${context.raw} students (${prioritizationData[context.dataIndex].percentage}%)`
+            },
+            backgroundColor: `hsl(var(--destructive))`,
+            titleColor: `hsl(var(--destructive-foreground))`,
+            bodyColor: `hsl(var(--destructive-foreground))`
+          },
+          legend: { display: false }
+        },
+        scales: {
+          x: {
+            beginAtZero: true,
+            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+          },
+          y: {
+            grid: { display: false }
+          }
+        }
+      }
+    });
+
+    // Study Techniques Chart
+    const techniques = [
+      { name: 'Time-blocking', count: 5, percentage: 71.4 },
+      { name: 'To-do lists', count: 4, percentage: 57.1 },
+      { name: 'Pomodoro Technique', count: 2, percentage: 28.6 }
+    ];
+    new Chart(document.getElementById('studyTechniquesChart'), {
+      type: 'bar',
+      data: {
+        labels: techniques.map(t => t.name),
+        datasets: [{
+          label: 'Number of Students',
+          data: techniques.map(t => t.count),
+          backgroundColor: getChartColors(techniques.length),
+          borderRadius: 5,
+          barThickness: 20
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: context =>
+                `${context.label}: ${context.raw} students (${techniques[context.dataIndex].percentage}%)`
+            },
+            backgroundColor: `hsl(var(--destructive))`,
+            titleColor: `hsl(var(--destructive-foreground))`,
+            bodyColor: `hsl(var(--destructive-foreground))`
+          },
+          legend: { display: false }
+        },
+        scales: {
+          x: {
+            beginAtZero: true,
+            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+            title: { display: true, text: 'Student Count' }
+          },
+          y: {
+            grid: { display: false },
+            ticks: {
+              autoSkip: false,
+              maxRotation: 0,
+              padding: 10
+            }
+          }
+        }
+      }
+    });
+
+    // Exam Challenges Chart
+    const challenges = [
+      { name: 'Procrastination', count: 9, percentage: 75.0 },
+      { name: 'Stress/anxiety', count: 6, percentage: 50.0 },
+      { name: 'Lack of time', count: 5, percentage: 41.7 },
+      { name: 'Difficulty understanding concepts', count: 3, percentage: 25.0 },
+      { name: 'Other (please specify)', count: 0, percentage: 0.0 }
+    ];
+    new Chart(document.getElementById('examChallengesChart'), {
+      type: 'bar',
+      data: {
+        labels: challenges.map(c => c.name),
+        datasets: [{
+          label: 'Number of Students',
+          data: challenges.map(c => c.count),
+          backgroundColor: getChartColors(challenges.length),
+          borderRadius: 5,
+          barThickness: 18
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: context =>
+                `${context.label}: ${context.raw} students (${challenges[context.dataIndex].percentage}%)`
+            },
+            backgroundColor: `hsl(var(--destructive))`,
+            titleColor: `hsl(var(--destructive-foreground))`,
+            bodyColor: `hsl(var(--destructive-foreground))`
+          },
+          legend: { display: false }
+        },
+        scales: {
+          x: {
+            beginAtZero: true,
+            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+            title: { display: true, text: 'Student Count' }
+          },
+          y: {
+            grid: { display: false },
+            ticks: {
+              autoSkip: false,
+              maxRotation: 0,
+              padding: 10
+            }
+          }
+        }
+      }
+    });
+
+    // Student Level Distribution Chart
+    const studyLevelData = [
+      { level: "Freshman", count: 7, percentage: 58.3 },
+      { level: "Graduate Student", count: 3, percentage: 25.0 },
+      { level: "Junior", count: 1, percentage: 8.3 },
+      { level: "Sophomore", count: 0, percentage: 0.0 },
+      { level: "Senior", count: 0, percentage: 0.0 }
+    ];
+    const studentLevelChart = new Chart(document.getElementById('studentLevelChart'), {
+      type: 'pie',
+      data: {
+        labels: studyLevelData.map(item => item.level),
+        datasets: [{
+          label: 'Students',
+          data: studyLevelData.map(item => item.count),
+          backgroundColor: getChartColors(studyLevelData.length),
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: context =>
+                `${context.label}: ${context.raw} students (${studyLevelData[context.dataIndex].percentage}%)`
+            },
+            backgroundColor: `hsl(var(--destructive))`,
+            titleColor: `hsl(var(--destructive-foreground))`,
+            bodyColor: `hsl(var(--destructive-foreground))`
+          }
+        }
+      }
+    });
+    studyLevelData.forEach((item, index) => {
+      const legendItem = document.createElement('li');
+      legendItem.className = 'legend-item';
+      const colorBox = document.createElement('span');
+      colorBox.className = 'legend-color';
+      colorBox.style.backgroundColor = `hsl(var(--chart-${index + 1}))`;
+      const text = document.createTextNode(`${item.level} (${item.percentage}%)`);
+      legendItem.appendChild(colorBox);
+      legendItem.appendChild(text);
+      document.getElementById('studentLevelLegend').appendChild(legendItem);
+    });
+
+    // Academic Fields Chart
+    const academicData = [
+      { field: 'Mechanical', count: 3, percentage: 25.0 },
+      { field: 'Electrical', count: 2, percentage: 16.7 },
+      { field: 'Preparatory Classes', count: 2, percentage: 16.7 },
+      { field: 'Civil', count: 1, percentage: 8.3 },
+      { field: 'Computer Science', count: 1, percentage: 8.3 },
+      { field: 'Chemical', count: 1, percentage: 8.3 },
+      { field: 'Economics', count: 1, percentage: 8.3 },
+      { field: 'Financial and accounting management', count: 1, percentage: 8.3 }
+    ];
+    const academicFieldsChart = new Chart(document.getElementById('academicFieldsChart'), {
+      type: 'pie',
+      data: {
+        labels: academicData.map(item => item.field),
+        datasets: [{
+          label: 'Students',
+          data: academicData.map(item => item.count),
+          backgroundColor: getChartColors(academicData.length),
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: context =>
+                `${context.label}: ${context.raw} students (${academicData[context.dataIndex].percentage}%)`
+            },
+            backgroundColor: `hsl(var(--destructive))`,
+            titleColor: `hsl(var(--destructive-foreground))`,
+            bodyColor: `hsl(var(--destructive-foreground))`
+          }
+        }
+      }
+    });
+    academicData.forEach((item, index) => {
+      const legendItem = document.createElement('li');
+      legendItem.className = 'legend-item';
+      const colorBox = document.createElement('span');
+      colorBox.className = 'legend-color';
+      colorBox.style.backgroundColor = `hsl(var(--chart-${index + 1}))`;
+      const text = document.createTextNode(`${item.field} (${item.percentage}%)`);
+      legendItem.appendChild(colorBox);
+      legendItem.appendChild(text);
+      document.getElementById('academicFieldsLegend').appendChild(legendItem);
+    });
+
+    // Countries Chart
+    const countryData = [
+      { country: 'Morocco', count: 7, percentage: 63.6 },
+      { country: 'Egypt', count: 1, percentage: 9.1 },
+      { country: 'Greece', count: 1, percentage: 9.1 },
+      { country: 'Sénégal', count: 1, percentage: 9.1 },
+      { country: 'Tunisie', count: 1, percentage: 9.1 }
+    ];
+    const countriesChart = new Chart(document.getElementById('countriesChart'), {
+      type: 'pie',
+      data: {
+        labels: countryData.map(item => item.country),
+        datasets: [{
+          label: 'Students',
+          data: countryData.map(item => item.count),
+          backgroundColor: getChartColors(countryData.length),
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: context =>
+                `${context.label}: ${context.raw} students (${countryData[context.dataIndex].percentage}%)`
+            },
+            backgroundColor: `hsl(var(--destructive))`,
+            titleColor: `hsl(var(--destructive-foreground))`,
+            bodyColor: `hsl(var(--destructive-foreground))`
+          }
+        }
+      }
+    });
+    countryData.forEach((item, index) => {
+      const legendItem = document.createElement('li');
+      legendItem.className = 'legend-item';
+      const colorBox = document.createElement('span');
+      colorBox.className = 'legend-color';
+      colorBox.style.backgroundColor = `hsl(var(--chart-${index + 1}))`;
+      const text = document.createTextNode(`${item.country} (${item.percentage}%)`);
+      legendItem.appendChild(colorBox);
+      legendItem.appendChild(text);
+      document.getElementById('countriesLegend').appendChild(legendItem);
+    });
+
+    // Time Management Chart
+    const timeManagementData = [
+      { category: "Yes", count: 7, percentage: 58.3 },
+      { category: "No", count: 5, percentage: 41.7 }
+    ];
+    const timeManagementChart = new Chart(document.getElementById('timeManagementChart'), {
+      type: 'pie',
+      data: {
+        labels: timeManagementData.map(item => item.category),
+        datasets: [{
+          label: 'Responses',
+          data: timeManagementData.map(item => item.count),
+          backgroundColor: getChartColors(timeManagementData.length),
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: context =>
+                `${context.label}: ${context.raw} respondents (${timeManagementData[context.dataIndex].percentage}%)`
+            },
+            backgroundColor: `hsl(var(--destructive))`,
+            titleColor: `hsl(var(--destructive-foreground))`,
+            bodyColor: `hsl(var(--destructive-foreground))`
+          }
+        }
+      }
+    });
+    timeManagementData.forEach((item, index) => {
+      const legendItem = document.createElement('li');
+      legendItem.className = 'legend-item';
+      const colorBox = document.createElement('span');
+      colorBox.className = 'legend-color';
+      colorBox.style.backgroundColor = `hsl(var(--chart-${index + 1}))`;
+      const text = document.createTextNode(`${item.category} (${item.percentage}%)`);
+      legendItem.appendChild(colorBox);
+      legendItem.appendChild(text);
+      document.getElementById('timeManagementLegend').appendChild(legendItem);
+    });
+
+    // Study Strategies Chart
+    const strategies = [
+      { name: 'Practicing past exam papers', count: 9, percentage: 75.0 },
+      { name: 'Solving problems actively', count: 7, percentage: 58.3 },
+      { name: 'Watching video tutorials', count: 7, percentage: 58.3 },
+      { name: 'Creating a study schedule', count: 6, percentage: 50.0 },
+      { name: 'Group study sessions', count: 2, percentage: 16.7 },
+      { name: 'Timetable, Setting clear goals', count: 1, percentage: 8.3 }
+    ];
+    new Chart(document.getElementById('studyStrategiesChart'), {
+      type: 'bar',
+      data: {
+        labels: strategies.map(s => s.name),
+        datasets: [{
+          label: 'Number of Students',
+          data: strategies.map(s => s.count),
+          backgroundColor: getChartColors(strategies.length),
+          borderRadius: 5,
+          barThickness: 18
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: context =>
+                `${context.label}: ${context.raw} students (${strategies[context.dataIndex].percentage}%)`
+            },
+            backgroundColor: `hsl(var(--destructive))`,
+            titleColor: `hsl(var(--destructive-foreground))`,
+            bodyColor: `hsl(var(--destructive-foreground))`
+          },
+          legend: { display: false }
+        },
+        scales: {
+          x: {
+            beginAtZero: true,
+            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+            title: { display: true, text: 'Student Count' }
+          },
+          y: {
+            grid: { display: false },
+            ticks: {
+              autoSkip: false,
+              maxRotation: 0,
+              padding: 10
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
