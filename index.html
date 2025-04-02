@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Combined Study Surveys and Charts</title>
+  <title>Effective Strategies for Exam Preparation</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     @layer base {
@@ -154,23 +154,62 @@
   </style>
 </head>
 <body>
-  <!-- Exam Preparation Advice -->
+  <header>
+    <h1 style="text-align: center; margin-bottom: 1rem;">
+      Effective Strategies for Exam Preparation
+    </h1>
+    <p style="text-align: center; margin-bottom: 2rem;">
+      Welcome! I'm Yassine El Aidous, and I created this website to showcase the most effective exam preparation strategies.
+      This project is built on a survey I developed, designed to present data in a clear, concise, and insightful way. 
+      My goal is to help students optimize their study habits using data-driven techniques.
+    </p>
+  </header>
+  <!-- Countries Distribution -->
   <div class="card">
     <div class="card-header">
-      <div class="card-title">Effective Strategies to prepare for an Engineering Exam</div>
-      <div class="card-description">Collected Responses (n=9)</div>
+      <div class="card-title">Countries Distribution</div>
+      <div class="card-description">Survey Results (n=11)</div>
     </div>
-    <ul class="advice-list">
-      <li class="advice-item">Apply engineering and project management to studying, approach the curriculum as an engineer would approach analyzing problems.</li>
-      <li class="advice-item">To prepare well for engineering exams, make a study plan and start early. Focus on understanding concepts, not just memorizing formulas. Practice old exams and solve many problems to get better. Use short notes and explain ideas in simple words to remember them easily.</li>
-      <li class="advice-item">Don’t let courses go until the last minute because you will feel anxiety and stress. Don’t forget to learn in a smart way, not the hard way, and keep hope.</li>
-      <li class="advice-item">Do what you can possibly do. When being stressed, you will probably procrastinate, which will result in nothing. Even if there is 1 hour left, just do your best with the available time instead of blaming yourself or saying "I should have done this earlier."</li>
-      <li class="advice-item">Pray a lot.</li>
-      <li class="advice-item">Don’t study engineering.</li>
-      <li class="advice-item">When you rest and you don’t study, set a goal to actually rest and don’t burn your energy. More important than “engineering” your time is engineering your energy.</li>
-      <li class="advice-item">Just stay active and explore other areas for more general knowledge.</li>
-      <li class="advice-item">Just do everything on time to be honest; don't let it stack up on you.</li>
-    </ul>
+    <div class="chart-container">
+      <canvas id="countriesChart"></canvas>
+    </div>
+    <ul class="chart-legend" id="countriesLegend"></ul>
+  </div>
+
+  <!-- Year in College Distribution -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Student Level Distribution</div>
+      <div class="card-description">Survey Results (n=12)</div>
+    </div>
+    <div class="chart-container">
+      <canvas id="studentLevelChart"></canvas>
+    </div>
+    <ul class="chart-legend" id="studentLevelLegend"></ul>
+  </div>
+
+  <!-- Academic Fields Distribution -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Academic Fields Distribution</div>
+      <div class="card-description">Survey Results (n=12)</div>
+    </div>
+    <div class="chart-container">
+      <canvas id="academicFieldsChart"></canvas>
+    </div>
+    <ul class="chart-legend" id="academicFieldsLegend"></ul>
+  </div>
+
+  <!-- Time Management Usage -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Time Management Usage</div>
+      <div class="card-description">Survey Results (n=12)</div>
+    </div>
+    <div class="chart-container">
+      <canvas id="timeManagementChart"></canvas>
+    </div>
+    <ul class="chart-legend" id="timeManagementLegend"></ul>
   </div>
 
   <!-- Topic Prioritization Chart -->
@@ -195,8 +234,10 @@
 
   <!-- Study Techniques Chart -->
   <div class="card">
-    <h2 class="card-title">Study Techniques Usage</h2>
-    <div class="card-description">Student Survey Results (n=7 respondents)</div>
+    <div class="card-header">
+      <div class="card-title">Study Techniques Usage</div>
+      <div class="card-description">Survey Results (n=7)</div>
+    </div>
     <div class="chart-container">
       <canvas id="studyTechniquesChart"></canvas>
     </div>
@@ -213,8 +254,10 @@
 
   <!-- Exam Challenges Chart -->
   <div class="card">
-    <h2 class="card-title">Exam Preparation Challenges</h2>
-    <div class="card-description">Student Survey Results (n=12 respondents)</div>
+    <div class="card-header">
+      <div class="card-title">Exam Preparation Challenges</div>
+      <div class="card-description">Survey Results (n=12)</div>
+    </div>
     <div class="chart-container">
       <canvas id="examChallengesChart"></canvas>
     </div>
@@ -229,58 +272,12 @@
     </div>
   </div>
 
-  <!-- Student Level Distribution Chart -->
-  <div class="card">
-    <div class="card-header">
-      <div class="card-title">Student Level Distribution</div>
-      <div class="card-description">Survey Results (n=12)</div>
-    </div>
-    <div class="chart-container">
-      <canvas id="studentLevelChart"></canvas>
-    </div>
-    <ul class="chart-legend" id="studentLevelLegend"></ul>
-  </div>
-
-  <!-- Academic Fields Chart -->
-  <div class="card">
-    <div class="card-header" style="padding: 1.5rem; border-bottom: 1px solid hsl(var(--border)); text-align: center">
-      <div class="card-title">Academic Fields Distribution</div>
-      <div class="card-description">Survey Results (n=12)</div>
-    </div>
-    <div class="chart-container">
-      <canvas id="academicFieldsChart"></canvas>
-    </div>
-    <ul class="chart-legend" id="academicFieldsLegend"></ul>
-  </div>
-
-  <!-- Countries Distribution Chart -->
-  <div class="card">
-    <div class="card-header" style="padding: 1.5rem; border-bottom: 1px solid hsl(var(--border)); text-align: center">
-      <div class="card-title">Countries Distribution</div>
-      <div class="card-description">Survey Results (n=11)</div>
-    </div>
-    <div class="chart-container">
-      <canvas id="countriesChart"></canvas>
-    </div>
-    <ul class="chart-legend" id="countriesLegend"></ul>
-  </div>
-
-  <!-- Time Management Chart -->
-  <div class="card">
-    <div class="card-header">
-      <div class="card-title">Time Management Usage</div>
-      <div class="card-description">Survey Results (n=12)</div>
-    </div>
-    <div class="chart-container">
-      <canvas id="timeManagementChart"></canvas>
-    </div>
-    <ul class="chart-legend" id="timeManagementLegend"></ul>
-  </div>
-
   <!-- Study Strategies Chart -->
   <div class="card">
-    <h2 class="card-title">Study Strategies Effectiveness</h2>
-    <div class="card-description">Survey Results (n=12 respondents)</div>
+    <div class="card-header">
+      <div class="card-title">Study Strategies Effectiveness</div>
+      <div class="card-description">Survey Results (n=12)</div>
+    </div>
     <div class="chart-container">
       <canvas id="studyStrategiesChart"></canvas>
     </div>
@@ -292,6 +289,66 @@
       <div class="leading-none">
         Strategies used by students for exam preparation
       </div>
+    </div>
+  </div>
+
+  <!-- Exam Challenges Survey -->
+  <div class="card">
+    <h2 class="card-title">Exam Preparation Challenges</h2>
+    <div class="card-description">Student Survey Results (n=12 respondents)</div>
+
+    <div class="chart-container">
+      <canvas id="examChart"></canvas>
+    </div>
+
+    <div class="card-footer"></div>
+      <div class="font-medium">
+        Top challenge: Procrastination (75%)
+        <span style="font-size: 1.2em; color: hsl(var(--destructive));">🔥</span>
+      </div>
+      <div class="leading-none">
+        Most common difficulties faced during exam preparation
+      </div>
+    </div>
+  </div>
+
+  <!-- Exam Preparation Advice -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Exam Preparation Advice</div>
+      <div class="card-description">Collected Responses (n=9)</div>
+    </div>
+
+    <div class="content-section">
+      <ul class="advice-list">
+        <li class="advice-item">
+          Apply engineering and project management to studying, approach the curriculum as an engineer would approach analyzing problems.
+        </li>
+        <li class="advice-item">
+          To prepare well for engineering exams, make a study plan and start early. Focus on understanding concepts, not just memorizing formulas. Practice old exams and solve many problems to get better. Use short notes and explain ideas in simple words to remember them easily.
+        </li>
+        <li class="advice-item">
+          Don’t let courses go until the last minute because you will feel anxiety and stress. Don’t forget to learn in a smart way, not the hard way, and keep hope.
+        </li>
+        <li class="advice-item">
+          Do what you can possibly do. When being stressed, you will probably procrastinate, which will result in nothing. Even if there is 1 hour left, just do your best with the available time instead of blaming yourself or saying "I should have done this earlier."
+        </li>
+        <li class="advice-item">
+          Pray a lot.
+        </li>
+        <li class="advice-item">
+          Don’t study engineering.
+        </li>
+        <li class="advice-item">
+          When you rest and you don’t study, set a goal to actually rest and don’t burn your energy. More important than “engineering” your time is engineering your energy.
+        </li>
+        <li class="advice-item">
+          Just stay active and explore other areas for more general knowledge.
+        </li>
+        <li class="advice-item">
+          Just do everything on time to be honest; don't let it stack up on you.
+        </li>
+      </ul>
     </div>
   </div>
 
@@ -685,6 +742,63 @@
             backgroundColor: `hsl(var(--destructive))`,
             titleColor: `hsl(var(--destructive-foreground))`,
             bodyColor: `hsl(var(--destructive-foreground))`
+          },
+          legend: { display: false }
+        },
+        scales: {
+          x: {
+            beginAtZero: true,
+            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+            title: { display: true, text: 'Student Count' }
+          },
+          y: {
+            grid: { display: false },
+            ticks: {
+              autoSkip: false,
+              maxRotation: 0,
+              padding: 10
+            }
+          }
+        }
+      }
+    });
+
+    const rootStyles = getComputedStyle(document.documentElement);
+    const chartColors = [
+      `hsl(${rootStyles.getPropertyValue('--chart-1').trim()})`,
+      `hsl(${rootStyles.getPropertyValue('--chart-2').trim()})`,
+      `hsl(${rootStyles.getPropertyValue('--chart-3').trim()})`,
+      `hsl(${rootStyles.getPropertyValue('--chart-4').trim()})`,
+      `hsl(${rootStyles.getPropertyValue('--chart-5').trim()})`
+    ];
+
+    const ctx = document.getElementById('examChart').getContext('2d');
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: challenges.map(c => c.name),
+        datasets: [{
+          label: 'Number of Students',
+          data: challenges.map(c => c.count),
+          backgroundColor: chartColors,
+          borderRadius: 5,
+          barThickness: 18
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: (context) =>
+                `${context.label}: ${context.raw} students (${challenges[context.dataIndex].percentage}%)`
+            },
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            titleColor: '#fff',
+            bodyColor: '#fff'
           },
           legend: { display: false }
         },
